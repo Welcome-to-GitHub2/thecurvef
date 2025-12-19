@@ -1,0 +1,34 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&family=Poppins:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-primary-900: #0F4C5C;
+  --color-primary-800: #1a5c70;
+  --color-primary-100: #E0F2F7;
+  --color-accent-500: #FF6B35;
+  --color-accent-600: #E55A2B;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Parallax Effect */
+@keyframes parallax {
+  0% { background-position: 0% 0%; }
+  100% { background-position: 100% 100%; }
+}
+
+.parallax-bg {
+  background: url('C:\Users\mohla\Pictures\TheCurveF\Graduates\nom.jpg') center center / cover no-repeat;
+  animation: parallax 15s ease infinite;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1; /* Make sure the content stays above the background */
+}
