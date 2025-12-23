@@ -4,7 +4,6 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 
-// Tutor-specific images
 const backgroundImages = [
   "/images/backgrounds/tut1.jpg",
   "/images/backgrounds/tut2.jpg",
@@ -25,7 +24,6 @@ export default function BookTutor() {
 
   return (
     <section className="relative min-h-screen overflow-hidden flex flex-col items-center justify-center px-6 py-12 text-white">
-      {/* Background Slideshow */}
       {backgroundImages.map((src, index) => (
         <motion.div
           key={src}
@@ -37,9 +35,8 @@ export default function BookTutor() {
           <Image src={src} alt="Background" fill className="object-cover" />
         </motion.div>
       ))}
-      <div className="absolute inset-0 bg-[#0F4C5C]/65" />
+      <div className="absolute inset-0 bg-[#0F4C5C]/40" />
 
-      {/* Content */}
       <div className="relative z-10 max-w-4xl w-full text-center">
         <h1 className="text-4xl lg:text-5xl font-black mb-8">
           Book Your Tutor

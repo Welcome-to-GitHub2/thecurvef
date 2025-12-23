@@ -16,9 +16,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="font-sans antialiased text-white bg-[#0F4C5C] min-h-screen">
+      <body className="font-sans antialiased text-white">
         <Navbar />
-        <main className="min-h-screen">{children}</main>
+        <main>{children}</main>
         <FloatingWA />
         <Footer />
       </body>

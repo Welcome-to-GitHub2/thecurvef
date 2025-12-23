@@ -1,101 +1,92 @@
-'use client';
-import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
-import Image from "next/image";
+"use client";
 import Link from "next/link";
+import Image from "next/image";
+import { useState } from "react";
+import { motion } from "framer-motion";
 
-// Home-specific slideshow images
-const backgroundImages = [
-  "/images/backgrounds/home1.jpg",
-  "/images/backgrounds/home2.jpg",
-  "/images/backgrounds/home3.jpg",
-  "/images/backgrounds/home4.jpg",
-  "/images/backgrounds/home5.jpg",
-  "/images/backgrounds/home6.jpg",
-];
+export default function Navbar() {
+  const [mobileOpen, setMobileOpen] = useState(false);
 
-export default function Home() {
-  const [currentBg, setCurrentBg] = useState(0);
+  const menu = [
+    "Home", "Past Papers", "APS Calculator", "University Checker",
+    "NBT Practice", "Matric Results", "Book Tutor", "Camps",
+    "Tutors", "NSFAS & Bursaries", "Remark & Supp", "Contact",
+    "About Us",
+  ];
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentBg((prev) => (prev + 1) % backgroundImages.length);
-    }, 6000); // Change every 6 seconds
-    return () => clearInterval(interval);
-  }, []);
+  const getHref = (item: string) => {
+    const map: Record<string, string> = {
+      "Home": "/", "Past Papers": "/past-papers", "APS Calculator": "/aps-calculator",
+      "University Checker": "/university-checker", "NBT Practice": "/nbt-practice",
+      "Matric Results": "/matric-results", "Book Tutor": "/book-tutor",
+      "Camps": "/camps", "Tutors": "/tutors", "NSFAS & Bursaries": "/nsfas-bursaries",
+      "Remark & Supp": "/remark-supplementary", "Contact": "/contact",
+      "About Us": "/about",
+    };
+    return map[item] || "/";
+  };
 
   return (
-    <>
-      {/* HERO SECTION - Slideshow Background */}
-      <section className="relative min-h-screen overflow-hidden flex items-center justify-center text-center">
-        {/* Background Images */}
-        {backgroundImages.map((src, index) => (
-          <motion.div
-            key={src}
-            className="absolute inset-0"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: index === currentBg ? 1 : 0 }}
-            transition={{ duration: 1.5, ease: "easeInOut" }}
-          >
-            <Image
-              src={src}
-              alt="Background slideshow"
-              fill
-              className="object-cover"
-              priority={index === 0}
+    <nav className="bg-[#0F4C5C] text-white shadow-lg sticky top-0 z-50">
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="flex justify-between items-center h-24">
+          <Link href="/" className="flex items-center gap-4">
+            <Image 
+              src="/logo.jpg" 
+              alt="TheCurveF Logo" 
+              width={60} 
+              height={60} 
+              className="rounded-full border-4 border-[#FF6B35]"
             />
+            <span className="text-4xl font-black text-[#F5B041]">TheCurveF</span>
+          </Link>
+
+          <div className="hidden md:flex items-center space-x-6">
+            {menu.map((item) => (
+              <Link
+                key={item}
+                href={getHref(item)}
+                className="px-5 py-3 text-lg font-medium rounded-full hover:bg-[#FF6B35] transition"
+              >
+                {item}
+              </Link>
+            ))}
+          </div>
+
+          {/* Mobile Hamburger – Bigger, stylish, orange glow */}
+          <motion.button
+            onClick={() => setMobileOpen(!mobileOpen)}
+            className="md:hidden text-[#F5B041] text-5xl p-4 rounded-full hover:bg-[#FF6B35]/50 transition shadow-lg hover:shadow-[#FF6B35]/50"
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+          >
+            {mobileOpen ? "✕" : "☰"}
+          </motion.button>
+        </div>
+
+        {/* Mobile Menu – Organized grid, spaced, stylish pills */}
+        {mobileOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.3 }}
+            className="md:hidden py-10 bg-[#0F4C5C]/95 backdrop-blur-md border-t border-white/20"
+          >
+            <div className="grid grid-cols-2 gap-6 px-8 max-w-4xl mx-auto">
+              {menu.map((item) => (
+                <Link
+                  key={item}
+                  href={getHref(item)}
+                  className="px-6 py-4 text-lg font-semibold text-[#E0F2F7] bg-[#1a5c70]/70 hover:bg-[#FF6B35] hover:text-white rounded-full transition shadow-md"
+                  onClick={() => setMobileOpen(false)}
+                >
+                  {item}
+                </Link>
+              ))}
+            </div>
           </motion.div>
-        ))}
-
-        {/* Overlay for readability */}
-        <div className="absolute inset-0 bg-[#0F4C5C]/65" />
-
-        {/* Content */}
-        <div className="relative z-10 max-w-5xl px-6">
-          <h1 className="text-5xl lg:text-7xl font-black leading-tight text-white mb-6">
-            Ace Your Matric.<br />Get Into University.
-          </h1>
-          <p className="text-xl lg:text-2xl text-[#E0F2F7] mb-12">
-            Free past papers, APS calculator, NBT practice & legendary camps.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-6 justify-center">
-            <Link
-              href="/past-papers"
-              className="bg-[#FF6B35] hover:bg-[#E55A2B] text-white font-bold py-5 px-10 rounded-xl text-xl transition"
-            >
-              Download Past Papers →
-            </Link>
-            <Link
-              href="/aps-calculator"
-              className="bg-white text-[#0F4C5C] hover:bg-gray-100 font-bold py-5 px-10 rounded-xl text-xl transition"
-            >
-              Calculate My APS
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* STATS SECTION */}
-      <section className="bg-gray-50 py-20">
-        <div className="max-w-7xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-10 text-center">
-          <div>
-            <div className="text-5xl font-black text-[#FF6B35]">10 000+</div>
-            <p className="text-gray-600 mt-3">Papers Downloaded</p>
-          </div>
-          <div>
-            <div className="text-5xl font-black text-[#FF6B35]">8+</div>
-            <p className="text-gray-600 mt-3">Years of Camps</p>
-          </div>
-          <div>
-            <div className="text-5xl font-black text-[#FF6B35]">300+</div>
-            <p className="text-gray-600 mt-3">Learners Placed</p>
-          </div>
-          <div>
-            <div className="text-5xl font-black text-[#FF6B35]">100%</div>
-            <p className="text-gray-600 mt-3">Free Resources</p>
-          </div>
-        </div>
-      </section>
-    </>
+        )}
+      </div>
+    </nav>
   );
 }
