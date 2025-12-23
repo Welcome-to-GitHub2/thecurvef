@@ -16,19 +16,6 @@ html {
   scroll-behavior: smooth;
 }
 
-/* Parallax Effect */
-@keyframes parallax {
-  0% { background-position: 0% 0%; }
-  100% { background-position: 100% 100%; }
-}
-
-.parallax-bg {
-  background: url('C:\Users\mohla\Pictures\TheCurveF\Graduates\nom.jpg') center center / cover no-repeat;
-  animation: parallax 15s ease infinite;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -1; /* Make sure the content stays above the background */
+body {
+  background: #000;
 }
