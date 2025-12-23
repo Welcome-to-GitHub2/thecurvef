@@ -4,13 +4,14 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 
-// Your background images (update paths if names differ)
+// Home-specific slideshow images
 const backgroundImages = [
   "/images/backgrounds/home1.jpg",
   "/images/backgrounds/home2.jpg",
   "/images/backgrounds/home3.jpg",
   "/images/backgrounds/home4.jpg",
   "/images/backgrounds/home5.jpg",
+  "/images/backgrounds/home6.jpg",
 ];
 
 export default function Home() {
@@ -27,7 +28,7 @@ export default function Home() {
     <>
       {/* HERO SECTION - Slideshow Background */}
       <section className="relative min-h-screen overflow-hidden flex items-center justify-center text-center">
-        {/* Background Images with Fade Transition */}
+        {/* Background Images */}
         {backgroundImages.map((src, index) => (
           <motion.div
             key={src}
@@ -41,15 +42,15 @@ export default function Home() {
               alt="Background slideshow"
               fill
               className="object-cover"
-              priority={index === 0} // Preload first image
+              priority={index === 0}
             />
           </motion.div>
         ))}
 
-        {/* Teal Overlay for Text Readability */}
+        {/* Overlay for readability */}
         <div className="absolute inset-0 bg-[#0F4C5C]/65" />
 
-        {/* Foreground Content */}
+        {/* Content */}
         <div className="relative z-10 max-w-5xl px-6">
           <h1 className="text-5xl lg:text-7xl font-black leading-tight text-white mb-6">
             Ace Your Matric.<br />Get Into University.

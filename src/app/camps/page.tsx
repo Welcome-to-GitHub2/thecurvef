@@ -4,12 +4,15 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 
+// Camps-specific images
 const backgroundImages = [
+  "/images/backgrounds/camp0.jpg",
   "/images/backgrounds/camp1.jpg",
   "/images/backgrounds/camp2.jpg",
   "/images/backgrounds/camp3.jpg",
   "/images/backgrounds/camp4.jpg",
   "/images/backgrounds/camp5.jpg",
+  "/images/backgrounds/camp6.jpg",
 ];
 
 export default function Camps() {
@@ -38,6 +41,7 @@ export default function Camps() {
       ))}
       <div className="absolute inset-0 bg-[#0F4C5C]/65" />
 
+      {/* Content */}
       <div className="relative z-10 max-w-4xl w-full text-center">
         <h1 className="text-4xl lg:text-5xl font-black mb-8">
           Legendary Camps

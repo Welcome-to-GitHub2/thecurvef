@@ -4,12 +4,17 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 
+// University-specific images
 const backgroundImages = [
-  "/images/backgrounds/bg1.jpg",
-  "/images/backgrounds/bg2.jpg",
-  "/images/backgrounds/bg3.jpg",
-  "/images/backgrounds/bg4.jpg",
-  "/images/backgrounds/bg5.jpg",
+  "/images/backgrounds/uni1.jpg",
+  "/images/backgrounds/uni2.jpg",
+  "/images/backgrounds/uni3.jpg",
+  "/images/backgrounds/uni4.jpg",
+  "/images/backgrounds/uni5.jpg",
+  "/images/backgrounds/uni6.jpg",
+  "/images/backgrounds/uni7.jpg",
+  "/images/backgrounds/uni8.jpg",
+  "/images/backgrounds/uni9.jpg",
 ];
 
 export default function UniversityChecker() {
@@ -26,7 +31,6 @@ export default function UniversityChecker() {
     return () => clearInterval(interval);
   }, []);
 
-  // Your university data here
   const universities: Record<string, { minAps: number; url: string }> = {
     "MBChB Medicine (UP/Wits)": { minAps: 35, url: "https://www.up.ac.za/faculty-of-health-sciences" },
     "BEng Engineering (UP/UJ)": { minAps: 35, url: "https://www.uj.ac.za/faculties/engineering-built-environment" },
@@ -63,6 +67,7 @@ export default function UniversityChecker() {
       ))}
       <div className="absolute inset-0 bg-[#0F4C5C]/65" />
 
+      {/* Content */}
       <div className="relative z-10 max-w-4xl w-full">
         <h1 className="text-4xl lg:text-5xl font-black text-center mb-8">
           University Programme Checker

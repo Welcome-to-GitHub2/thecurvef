@@ -1,45 +1,71 @@
-"use client";
-import { useState } from "react";
+'use client';
+import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
+import Image from "next/image";
+import Link from "next/link";
+
+// Tutor-specific images
+const backgroundImages = [
+  "/images/backgrounds/tut1.jpg",
+  "/images/backgrounds/tut2.jpg",
+  "/images/backgrounds/tut3.jpg",
+  "/images/backgrounds/tut4.jpg",
+  "/images/backgrounds/tut5.jpg",
+];
 
 export default function BookTutor() {
-  const [status, setStatus] = useState<"idle" | "success">("idle");
+  const [currentBg, setCurrentBg] = useState(0);
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setStatus("success");
-    setTimeout(() => setStatus("idle"), 5000);
-  };
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentBg((prev) => (prev + 1) % backgroundImages.length);
+    }, 6000);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
-    <section className="py-24 bg-gray-50 min-h-screen">
-      <div className="max-w-2xl mx-auto px-6">
-        <h1 className="text-5xl font-black text-center mb-8">Book Your Tutor</h1>
-        <p className="text-2xl text-center text-gray-600 mb-16">R300–R400 per hour • In-person or online</p>
+    <section className="relative min-h-screen overflow-hidden flex flex-col items-center justify-center px-6 py-12 text-white">
+      {/* Background Slideshow */}
+      {backgroundImages.map((src, index) => (
+        <motion.div
+          key={src}
+          className="absolute inset-0"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: index === currentBg ? 1 : 0 }}
+          transition={{ duration: 1.5, ease: "easeInOut" }}
+        >
+          <Image src={src} alt="Background" fill className="object-cover" />
+        </motion.div>
+      ))}
+      <div className="absolute inset-0 bg-[#0F4C5C]/65" />
 
-        <div className="bg-white rounded-3xl shadow-2xl p-12">
-          <form onSubmit={handleSubmit} className="space-y-8">
-            <input type="text" placeholder="Learner name" required className="w-full p-5 rounded-xl border-2 border-gray-300" />
-            <input type="tel" placeholder="Parent phone number" required className="w-full p-5 rounded-xl border-2 border-gray-300" />
-            <select required className="w-full p-5 rounded-xl border-2 border-gray-300">
-              <option value="">Select grade</option>
-              <option>Grade 8</option>
-              <option>Grade 9</option>
-              <option>Grade 10</option>
-              <option>Grade 11</option>
-              <option>Grade 12</option>
-            </select>
-            <textarea rows={4} placeholder="Subjects needed" required className="w-full p-5 rounded-xl border-2 border-gray-300"></textarea>
+      {/* Content */}
+      <div className="relative z-10 max-w-4xl w-full text-center">
+        <h1 className="text-4xl lg:text-5xl font-black mb-8">
+          Book Your Tutor
+        </h1>
 
-            <button type="submit" className="w-full bg-[#0F4C5C] hover:bg-[#1a5c70] text-white font-black text-xl py-6 rounded-xl">
-              Book My Tutor →
-            </button>
-          </form>
+        <p className="text-xl mb-12 max-w-3xl mx-auto">
+          Get personalized one-on-one or small group tutoring from our expert matric specialists. Limited spots available!
+        </p>
 
-          {status === "success" && (
-            <div className="mt-8 bg-green-100 border-2 border-green-600 text-green-800 p-6 rounded-xl text-center font-bold text-xl">
-              Booking received! We’ll call you in 5 minutes 🔥
-            </div>
-          )}
+        <div className="bg-[#1a5c70]/70 p-8 rounded-xl shadow-lg max-w-2xl mx-auto">
+          <h2 className="text-2xl font-bold mb-6">How to Book</h2>
+          <ol className="text-left space-y-4 text-lg mb-8">
+            <li>1. Choose your subject(s) and preferred times.</li>
+            <li>2. Contact us via WhatsApp or email.</li>
+            <li>3. Secure your spot with a small deposit.</li>
+          </ol>
+          <Link 
+            href="https://wa.me/27821234567?text=Hi%20TheCurveF!%20I%20want%20to%20book%20a%20tutor%20for%20matric%202026."
+            className="inline-block bg-[#FF6B35] hover:bg-[#E55A2B] font-bold py-6 px-12 rounded-xl text-2xl transition mb-4"
+            target="_blank"
+          >
+            Book via WhatsApp
+          </Link>
+          <p className="text-sm mt-4">
+            Or email: info@thecurvef.co.za
+          </p>
         </div>
       </div>
     </section>
