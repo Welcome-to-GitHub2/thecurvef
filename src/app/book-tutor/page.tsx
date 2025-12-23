@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 
+// Tutor-specific slideshow images (update filenames if different)
 const backgroundImages = [
   "/images/backgrounds/tut1.jpg",
   "/images/backgrounds/tut2.jpg",
@@ -18,12 +19,13 @@ export default function BookTutor() {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentBg((prev) => (prev + 1) % backgroundImages.length);
-    }, 6000);
+    }, 6000); // Change every 6 seconds
     return () => clearInterval(interval);
   }, []);
 
   return (
-    <section className="relative min-h-screen overflow-hidden flex flex-col items-center justify-center px-6 py-12 text-white">
+    <div className="relative min-h-screen">
+      {/* Background Slideshow */}
       {backgroundImages.map((src, index) => (
         <motion.div
           key={src}
@@ -32,22 +34,31 @@ export default function BookTutor() {
           animate={{ opacity: index === currentBg ? 1 : 0 }}
           transition={{ duration: 1.5, ease: "easeInOut" }}
         >
-          <Image src={src} alt="Background" fill className="object-cover" />
+          <Image
+            src={src}
+            alt="Background slideshow"
+            fill
+            className="object-cover"
+            priority={index === 0}
+          />
         </motion.div>
       ))}
+
+      {/* Teal Overlay for readability */}
       <div className="absolute inset-0 bg-[#0F4C5C]/40" />
 
-      <div className="relative z-10 max-w-4xl w-full text-center">
-        <h1 className="text-4xl lg:text-5xl font-black mb-8">
+      {/* Page Content */}
+      <section className="relative min-h-screen flex flex-col items-center justify-center px-6 py-12 text-white">
+        <h1 className="text-4xl lg:text-5xl font-black mb-8 text-center">
           Book Your Tutor
         </h1>
 
-        <p className="text-xl mb-12 max-w-3xl mx-auto">
+        <p className="text-xl mb-12 max-w-3xl mx-auto text-center">
           Get personalized one-on-one or small group tutoring from our expert matric specialists. Limited spots available!
         </p>
 
-        <div className="bg-[#1a5c70]/70 p-8 rounded-xl shadow-lg max-w-2xl mx-auto">
-          <h2 className="text-2xl font-bold mb-6">How to Book</h2>
+        <div className="bg-[#1a5c70]/70 p-8 rounded-xl shadow-lg max-w-2xl w-full mx-auto">
+          <h2 className="text-2xl font-bold mb-6 text-center">How to Book</h2>
           <ol className="text-left space-y-4 text-lg mb-8">
             <li>1. Choose your subject(s) and preferred times.</li>
             <li>2. Contact us via WhatsApp or email.</li>
@@ -55,16 +66,16 @@ export default function BookTutor() {
           </ol>
           <Link 
             href="https://wa.me/27821234567?text=Hi%20TheCurveF!%20I%20want%20to%20book%20a%20tutor%20for%20matric%202026."
-            className="inline-block bg-[#FF6B35] hover:bg-[#E55A2B] font-bold py-6 px-12 rounded-xl text-2xl transition mb-4"
+            className="inline-block bg-[#FF6B35] hover:bg-[#E55A2B] font-bold py-6 px-12 rounded-xl text-2xl transition mb-4 w-full text-center"
             target="_blank"
           >
             Book via WhatsApp
           </Link>
-          <p className="text-sm mt-4">
+          <p className="text-sm mt-4 text-center">
             Or email: info@thecurvef.co.za
           </p>
         </div>
-      </div>
-    </section>
+      </section>
+    </div>
   );
 }

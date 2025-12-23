@@ -51,7 +51,7 @@ export default function UniversityChecker() {
   };
 
   return (
-    <section className="relative min-h-screen overflow-hidden flex flex-col items-center justify-center px-6 py-12 text-white">
+    <div className="relative min-h-screen">
       {backgroundImages.map((src, index) => (
         <motion.div
           key={src}
@@ -65,12 +65,12 @@ export default function UniversityChecker() {
       ))}
       <div className="absolute inset-0 bg-[#0F4C5C]/40" />
 
-      <div className="relative z-10 max-w-4xl w-full">
+      <section className="relative min-h-screen flex flex-col items-center justify-center px-6 py-12 text-white">
         <h1 className="text-4xl lg:text-5xl font-black text-center mb-8">
           University Programme Checker
         </h1>
 
-        <div className="max-w-md mx-auto mb-12">
+        <div className="max-w-md w-full mb-12">
           <input
             type="number"
             value={apsInput}
@@ -89,7 +89,7 @@ export default function UniversityChecker() {
         </div>
 
         {hasChecked && qualifiedPrograms.length > 0 && (
-          <div className="text-left">
+          <div className="text-left max-w-4xl w-full">
             <h2 className="text-3xl font-bold text-center mb-8">
               You qualify for {qualifiedPrograms.length} programme{qualifiedPrograms.length > 1 ? "s" : ""}!
             </h2>
@@ -116,7 +116,7 @@ export default function UniversityChecker() {
             No programmes found for APS {apsInput || "0"}. Try a higher score or check university websites directly.
           </p>
         )}
-      </div>
-    </section>
+      </section>
+    </div>
   );
 }

@@ -18,7 +18,7 @@ export default function RootLayout({
     <html lang="en">
       <body className="font-sans antialiased text-white">
         <Navbar />
-        <main>{children}</main>
+        <main>{children}</main> {/* No bg here */}
         <FloatingWA />
         <Footer />
       </body>

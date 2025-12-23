@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 
+// Camps-specific slideshow images (update filenames if different)
 const backgroundImages = [
   "/images/backgrounds/camp0.jpg",
   "/images/backgrounds/camp1.jpg",
@@ -25,7 +26,8 @@ export default function Camps() {
   }, []);
 
   return (
-    <section className="relative min-h-screen overflow-hidden flex flex-col items-center justify-center px-6 py-12 text-white">
+    <div className="relative min-h-screen">
+      {/* Background Slideshow */}
       {backgroundImages.map((src, index) => (
         <motion.div
           key={src}
@@ -34,33 +36,42 @@ export default function Camps() {
           animate={{ opacity: index === currentBg ? 1 : 0 }}
           transition={{ duration: 1.5, ease: "easeInOut" }}
         >
-          <Image src={src} alt="Background" fill className="object-cover" />
+          <Image
+            src={src}
+            alt="Background slideshow"
+            fill
+            className="object-cover"
+            priority={index === 0}
+          />
         </motion.div>
       ))}
+
+      {/* Teal Overlay for readability */}
       <div className="absolute inset-0 bg-[#0F4C5C]/40" />
 
-      <div className="relative z-10 max-w-4xl w-full text-center">
-        <h1 className="text-4xl lg:text-5xl font-black mb-8">
+      {/* Page Content */}
+      <section className="relative min-h-screen flex flex-col items-center justify-center px-6 py-12 text-white">
+        <h1 className="text-4xl lg:text-5xl font-black mb-8 text-center">
           Legendary Camps
         </h1>
 
-        <p className="text-xl mb-12 max-w-3xl mx-auto">
+        <p className="text-xl mb-12 max-w-3xl mx-auto text-center">
           Join our intensive revision camps – designed to boost your marks and prepare you for matric success.
         </p>
 
-        <div className="bg-[#1a5c70]/70 p-8 rounded-xl shadow-lg max-w-2xl mx-auto mb-12">
-          <h2 className="text-2xl font-bold mb-6">Upcoming Camps 2026</h2>
+        <div className="bg-[#1a5c70]/70 p-8 rounded-xl shadow-lg max-w-2xl w-full mx-auto mb-12">
+          <h2 className="text-2xl font-bold mb-6 text-center">Upcoming Camps 2026</h2>
           <ul className="text-left space-y-4 text-lg mb-8">
             <li>• February 2026: Pre-Matric Revision Camp</li>
             <li>• June 2026: Mid-Year Intensive</li>
             <li>• September 2026: Final Push Camp</li>
           </ul>
-          <p className="text-lg mb-6">
+          <p className="text-lg mb-6 text-center">
             See more pictures and videos from previous camps on our Facebook page!
           </p>
           <Link 
             href="https://www.facebook.com/TheCurveF/photos"
-            className="inline-block bg-[#FF6B35] hover:bg-[#E55A2B] font-bold py-6 px-12 rounded-xl text-2xl transition mb-4"
+            className="inline-block bg-[#FF6B35] hover:bg-[#E55A2B] font-bold py-6 px-12 rounded-xl text-2xl transition mb-4 w-full text-center"
             target="_blank"
           >
             View on Facebook
@@ -73,7 +84,7 @@ export default function Camps() {
         >
           Book Your Spot
         </Link>
-      </div>
-    </section>
+      </section>
+    </div>
   );
 }
