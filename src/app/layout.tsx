@@ -6,8 +6,7 @@ import Footer from "@/app/components/Footer";
 
 export const metadata: Metadata = {
   title: "TheCurveF – Matric Results, Past Papers & Tutors",
-  description:
-    "Free APS calculator, past papers, matric results checker, university checker & booking for tutors/camps.",
+  description: "Free APS calculator, past papers, matric results checker, university checker & booking for tutors/camps.",
 };
 
 export default function RootLayout({
@@ -17,9 +16,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="font-sans antialiased text-white bg-black overflow-x-hidden">
+      <body className="font-sans antialiased text-white min-h-screen">
         <Navbar />
-        <main className="relative min-h-screen">{children}</main>
+        <main>{children}</main>
         <FloatingWA />
         <Footer />
       </body>

@@ -18,7 +18,7 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
 
   return (
-    <nav className="sticky top-0 z-50 backdrop-blur-xl bg-black/40 border-b border-white/10">
+    <nav className="sticky top-0 z-50 backdrop-blur-xl bg-black/30 border-b border-white/10">
       <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-3">
           <Image src="/logo.jpg" alt="TheCurveF" width={48} height={48} className="rounded-full" />
@@ -33,9 +33,14 @@ export default function Navbar() {
           ))}
         </div>
 
-        <button onClick={() => setOpen(!open)} className="md:hidden text-3xl text-[#FF6B35]">
-          ☰
-        </button>
+        <motion.button
+          onClick={() => setOpen(!open)}
+          className="md:hidden text-4xl text-[#FF6B35] hover:text-white transition"
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
+        >
+          {open ? "✕" : "☰"}
+        </motion.button>
       </div>
 
       <AnimatePresence>
@@ -44,7 +49,7 @@ export default function Navbar() {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0 }}
-            className="md:hidden bg-black/90 backdrop-blur-xl p-6"
+            className="md:hidden bg-black/80 backdrop-blur-xl p-6"
           >
             <div className="grid grid-cols-2 gap-4">
               {menu.map((m) => (
@@ -52,7 +57,7 @@ export default function Navbar() {
                   key={m.href}
                   href={m.href}
                   onClick={() => setOpen(false)}
-                  className="py-3 px-4 rounded-lg bg-white/10 hover:bg-[#FF6B35]"
+                  className="py-3 px-4 rounded-lg bg-white/10 hover:bg-[#FF6B35] transition text-center"
                 >
                   {m.label}
                 </Link>
